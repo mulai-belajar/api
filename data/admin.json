@@ -1,0 +1,18 @@
+[{
+  "admin"
+  "id": 0,
+  "email": "",
+  "password": "",
+  "created_at": "",
+  "updated_at": ""
+}]
+
+[{
+  "category"
+  "id": 0,
+  "name": "",
+  "image_url": "",
+  "class": "",
+  "created_at": "",
+  "updated_at": "",
+}]

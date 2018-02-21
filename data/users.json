@@ -1,10 +1,40 @@
 [{
-  "id": -1,
-  "name": "",
-  "bio": "",
-  "email": "",
-  "password": "",
-  "reset_token": "",
+  "user"
+  "id": 0,
+  "fullname": "M. Alfatih Timur",
+  "bio": "CEO Kitabisa",
+  "email": "timmy@kitabisa.com",
+  "password": "123456",
+  "phone": "081315532353",
+  "address": "Padang",
+  "dateofbirth": "27 Desember 1991",
+  "sex": "Laki-laki",
+  "occupation": "Menghubungkan Orang Baik",
+  "workplace": "Pondok Pinang",
+  "organization": "Kitabisa",
+  "class": "IT & Software",
+  "status": "Pending",
   "created_at": "",
-  "updated_at": ""
+  "updated_at": "",
+
+  "reset_token": ""
+}]
+
+[{
+  "userDonation"
+  "id": 0,
+  "name": "",
+  "email": "",
+  "phone": "",
+  "address": "",
+  "dateofbirth": "",
+  "sex": "",
+  "occupation": "",
+  "workplace": "",
+  "organization": "",
+  "class": "",
+  "status": "",
+  "donation": "",
+  "created_at": "",
+  "updated_at": "",
 }]
