@@ -1,3 +1,6 @@
+//require("dotenv").config()
+
+//const cors = require("cors")
 const express = require('express')
 const path = require('path')
 const favicon = require('serve-favicon')
@@ -5,23 +8,40 @@ const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 
-const index = require('./routes/admin')
+const user = require('./routes/user')
+//const admin = require('./routes/admin')
+//const donation = require('./routes/donation')
+
+const mongoose = require(`mongoose`)
 
 const app = express()
 
+const db = mongoose.connection
+const url = `mongodb://localhost/mulaibelajar`
+const successMessage = `You're connected to MongoDB`
+const errorMessage = `Connection error : `
+
 // view engine setup
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
-app.use(logger('dev'))
+//app.use(cors())
+//app.use(logger('dev'))
+//app.use(express.static(path.join(__dirname, 'public', 'favicon.ico')))
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: false
 }))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/', index)
+//app.use('/admin', admin)
+app.use('/user', user)
+//app.use('/donation', donation)
+
+mongoose.connect(url);
+db.on(`error`, console.log.bind(console, errorMessage));
+db.once(`open`, () => {
+ console.log(successMessage);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -38,7 +58,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500)
-  res.render('error')
+  res.send(err)
 })
 
 module.exports = app
