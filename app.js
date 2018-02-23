@@ -10,6 +10,7 @@ const bodyParser = require('body-parser')
 
 const user = require('./routes/user')
 const admin = require('./routes/admin')
+const classes = require('./routes/class')
 //const donation = require('./routes/donation')
 
 const mongoose = require(`mongoose`)
@@ -35,6 +36,7 @@ app.use(cookieParser())
 
 app.use('/admin', admin)
 app.use('/user', user)
+app.use('/class', classes)
 //app.use('/donation', donation)
 
 mongoose.connect(url);
