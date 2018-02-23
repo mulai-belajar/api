@@ -1,45 +1,65 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost:27017/mulaibelajar')
-  .then(() =>  console.log('connection succesful'))
-  .catch((err) => console.error(err));
+//require("dotenv").config()
 
-var classes = require('./routes/class');
+//const cors = require("cors")
+const express = require('express')
+const path = require('path')
+const favicon = require('serve-favicon')
+const logger = require('morgan')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 
-var app = express();
+const user = require('./routes/user')
+const admin = require('./routes/admin')
+//const donation = require('./routes/donation')
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+const mongoose = require(`mongoose`)
 
-app.use('/api/class', classes);
+const app = express()
+
+const db = mongoose.connection
+const url = `mongodb://localhost/mulaibelajar`
+const successMessage = `You're connected to MongoDB`
+const errorMessage = `Connection error : `
+
+// view engine setup
+
+//app.use(cors())
+//app.use(logger('dev'))
+//app.use(express.static(path.join(__dirname, 'public', 'favicon.ico')))
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+  extended: false
+}))
+app.use(cookieParser())
+
+app.use('/admin', admin)
+app.use('/user', user)
+//app.use('/donation', donation)
+
+mongoose.connect(url);
+db.on(`error`, console.log.bind(console, errorMessage));
+db.once(`open`, () => {
+ console.log(successMessage);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+  const err = new Error('Not Found')
+  err.status = 404
+  next(err)
+})
 
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  
+  res.locals.message = err.message
+  res.locals.error = req.app.get('env') === 'development' ? err : {}
 
   // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+  res.status(err.status || 500)
+  res.send(err)
+})
 
-module.exports = app;
+module.exports = app
