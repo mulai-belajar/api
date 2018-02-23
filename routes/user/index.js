@@ -5,25 +5,25 @@ const usercontroller = require('../../controllers/user')
 const helpers = require("../../helpers/user-token")
 
 /* GET /user +  */
-router.get('/', helpers.isAuthenticated, usercontroller.get)
+router.get('/', usercontroller.get)
 
 /* GET User by id */
-router.get(`/:id`, helpers.isAuthenticated, usercontroller.getById)
+router.get(`/:id`, usercontroller.getById)
 
 /* GET User bypass */
-router.get("/bypass", usercontroller.getBypass)
+//router.get("/bypass", usercontroller.getBypass)
 
 /* POST User */
 router.post(`/register`, usercontroller.register)
 
 /* LOGIN User */
-router.post("/login", usercontroller.login)
+//router.post("/login", usercontroller.login)
 
 /* LOGOUT User*/
-router.put("/logout", helpers.isAuthenticated, usercontroller.logout)
+//router.put("/logout", helpers.isAuthenticated, usercontroller.logout)
 
 /* DELETE User */
-// router.delete("/", helpers.isAuthenticated, usercontroller.delete)
+router.delete("/", usercontroller.delete)
 
 /* DELETE User by id */
 // router.delete("/:id", helpers.isAuthenticated, usercontroller.deleteById)

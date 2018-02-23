@@ -8,9 +8,7 @@ module.exports = {
 /* Get /admin */
 get: (req, res) => {
   Admin.find({})
-    .populate({
-      path: "posts"
-    })
+
     .exec((err, admin) => {
       res.send({
         data: admin
@@ -21,9 +19,7 @@ get: (req, res) => {
 // GET /admin/bypass
 getBypass: (req, res) => {
   Admin.find({})
-    .populate({
-      path: "posts"
-    })
+
     .exec((err, admin) => {
       res.send({
         data: admin
@@ -46,16 +42,7 @@ getById: (req, res) => {
 // GET /admin?&email=yourname@domain.com
 getByQuery: (req, res) => {
   const query = {
-    fullname: req.params.fullname,
-    email: req.params.email,
-    phone: req.params.phone,
-    address: req.params.address,
-    dateofbirth: req.params.dateofbirth,
-    sex: req.params.sex,
-    occupation: req.params.occupation,
-    workplace: req.params.workplace,
-    organization: req.params.organization,
-    class: req.params.class
+    email: req.params.email
   }
 
   Admin.findOne(query, (error, admin) => {
@@ -79,7 +66,6 @@ delete: (req, res) => {
 // POST /admin/register
 register: (req, res) => {
   const body = {
-    fullname: req.body.fullname,
     email: req.body.email,
     password: req.body.password
   }
@@ -143,7 +129,6 @@ login: (req, res) => {
             iss: process.env.URL, // ISSUER: DOMAIN/URL of the service
             sub: admin._id, // SUBJECT: OID/UID/UUID/GUID
             id: admin.id, // ADMINID: Sequential ID
-            fullname: admin.fullname, // NAME: Full name
             email: admin.email // EMAIL: Email address
           },
           secret: process.env.JWT_SECRET,

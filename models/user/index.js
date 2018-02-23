@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs")
 const mongoose = require("mongoose")
 const sequence = require("mongoose-sequence")(mongoose)
-const userSchema = mongoose.Schema
+const UserSchema = mongoose.Schema
 
 
 // PRECONFIGURATION
@@ -11,9 +11,12 @@ const modelName = "User"
 const SALT_WORK_FACTOR = 8
 
 /* Create User Schema */
-const user = new userSchema(
+const user = new UserSchema(
   {
     // Internal
+    id: {
+      type: Number
+    },
     fullname: {
       type: String
     },
@@ -84,12 +87,12 @@ const user = new userSchema(
     },
     posts: [
       {
-        type: userSchema.Types.ObjectId,
+        type: UserSchema.Types.ObjectId,
         ref: "Post"
       }
     ]
   },
-  { timestamps: true }
+  { timestamps: true, versionKey: false }
 )
 
 

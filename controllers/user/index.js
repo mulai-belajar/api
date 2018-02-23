@@ -8,9 +8,9 @@ module.exports = {
   /* GET /user */
   get: (req, res) => {
     User.find({})
-      .populate({
-        path: "posts"
-      })
+      //.populate({
+      //  path: "posts"
+      //})
       .exec((err, user) => {
         res.send({
           data: user
@@ -179,7 +179,7 @@ module.exports = {
     // Finished sign in
   },
 
-  
+
   // GET /user/logout
   logout: (req, res) => {
     const decoded = {

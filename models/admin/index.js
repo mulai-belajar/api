@@ -15,7 +15,6 @@ const admin = new AdminSchema(
   // Internal
   id: {
     type: Number,
-    required: true
   },
   email: {
     type: String,
@@ -46,7 +45,7 @@ const admin = new AdminSchema(
   },
  },
 },
-  { timestamps: true } // Created & Updated At
+  { timestamps: true, versionKey: false } // Created & Updated At
 )
 
 // Auto increment adminId
