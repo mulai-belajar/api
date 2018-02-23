@@ -20,14 +20,14 @@ const admin = new AdminSchema(
     type: String,
     unique: true,
     lowercase: true,
-    required: true
+    //required: true
   },
   password: {
     type: String,
     hash: String,
     salt: String,
-    required: true,
-    login: {
+
+  login: {
       type: Boolean,
       default: false
   },

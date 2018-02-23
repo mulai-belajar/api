@@ -4,8 +4,8 @@ const router = express.Router()
 const admincontroller = require('../../controllers/admin')
 const helpers = require("../../helpers/admin-token")
 
-/* GET Admin. */
-router.get('/', admincontroller.get)
+/* GET /admin. */
+router.get('/', helpers.isAuthenticated, admincontroller.get)
 
 /* Get Admin by id */
 router.get(`/:id`, admincontroller.getById)
@@ -17,7 +17,7 @@ router.get(`/:id`, admincontroller.getById)
 router.post(`/register`, admincontroller.register)
 
 /* LOGIN Admin */
-//router.post("/login", admincontroller.login)
+router.post("/login", admincontroller.login)
 
 /* LOGOUT Admin*/
 //router.put("/logout", helpers.isAuthenticated, admincontroller.logout)

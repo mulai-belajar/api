@@ -74,7 +74,7 @@ register: (req, res) => {
   delete body.password
 
   newAdmin.save((error) => {
-    if (error) res.send("error")
+    if (error) res.send("Email address have been registered, change the email address")
     else {
       res.send({
         registered: body,
@@ -104,7 +104,7 @@ login: (req, res) => {
       // console.log(validPassword)
 
       // console.log(">>> admin found:", admin)
-      // console.log({ validPassword })
+      console.log({ validPassword })
 
       if (!admin) {
         // (1) If admin is not found
@@ -176,5 +176,5 @@ logout: (req, res) => {
   res.send({
     message: `Admin with id: ${decoded.id} is logged out`
   })
-}
+ }
 }
