@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 
 const user = require('./routes/user')
-//const admin = require('./routes/admin')
+const admin = require('./routes/admin')
 //const donation = require('./routes/donation')
 
 const mongoose = require(`mongoose`)
@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(cookieParser())
 
-//app.use('/admin', admin)
+app.use('/admin', admin)
 app.use('/user', user)
 //app.use('/donation', donation)
 

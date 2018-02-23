@@ -4,7 +4,7 @@ const router = express.Router()
 const usercontroller = require('../../controllers/user')
 const helpers = require("../../helpers/user-token")
 
-/* GET User. */
+/* GET /user +  */
 router.get('/', helpers.isAuthenticated, usercontroller.get)
 
 /* GET User by id */

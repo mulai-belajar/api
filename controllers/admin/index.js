@@ -18,7 +18,6 @@ get: (req, res) => {
     })
 },
 
-// ---------------------------------------------------------------------------
 // GET /admin/bypass
 getBypass: (req, res) => {
   Admin.find({})
@@ -32,7 +31,7 @@ getBypass: (req, res) => {
     })
 },
 
-// ---------------------------------------------------------------------------
+
 // GET /admin/:id
 getById: (req, res) => {
   Admin.findOne({id: Number(req.params.id)}, (err, admin) => {
@@ -43,7 +42,7 @@ getById: (req, res) => {
   })
 },
 
-// ---------------------------------------------------------------------------
+
 // GET /admin?&email=yourname@domain.com
 getByQuery: (req, res) => {
   const query = {
@@ -67,7 +66,7 @@ getByQuery: (req, res) => {
   })
 },
 
-// ---------------------------------------------------------------------------
+
 // DELETE /admin
 delete: (req, res) => {
   Admin.remove({}, (error) => {
@@ -76,7 +75,7 @@ delete: (req, res) => {
   })
 },
 
-// ---------------------------------------------------------------------------
+
 // POST /admin/register
 register: (req, res) => {
   const body = {
@@ -99,7 +98,7 @@ register: (req, res) => {
   })
 },
 
-// ---------------------------------------------------------------------------
+
 // POST /admin/login
 login: (req, res) => {
   // Create body object
@@ -179,7 +178,7 @@ login: (req, res) => {
   // Finished sign in
 },
 
-// ---------------------------------------------------------------------------
+
 // GET /admin/logout
 logout: (req, res) => {
   const decoded = {
@@ -192,4 +191,5 @@ logout: (req, res) => {
   res.send({
     message: `Admin with id: ${decoded.id} is logged out`
   })
+}
 }

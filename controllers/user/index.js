@@ -18,7 +18,7 @@ module.exports = {
       })
   },
 
-  // ---------------------------------------------------------------------------
+
   // GET /user/bypass
   getBypass: (req, res) => {
     User.find({})
@@ -32,7 +32,7 @@ module.exports = {
       })
   },
 
-  // ---------------------------------------------------------------------------
+
   // GET /user/:id
   getById: (req, res) => {
     User.findOne({id: Number(req.params.id)}, (err, user) => {
@@ -43,7 +43,7 @@ module.exports = {
     })
   },
 
-  // ---------------------------------------------------------------------------
+
   // GET /user?fullaname=yourname&email=yourname@domain.com
   getByQuery: (req, res) => {
     const query = {
@@ -67,7 +67,7 @@ module.exports = {
     })
   },
 
-  // ---------------------------------------------------------------------------
+
   // DELETE /user
   delete: (req, res) => {
     User.remove({}, (error) => {
@@ -76,7 +76,7 @@ module.exports = {
     })
   },
 
-  // ---------------------------------------------------------------------------
+
   // POST /user/register
   register: (req, res) => {
     const body = {
@@ -99,7 +99,7 @@ module.exports = {
     })
   },
 
-  // ---------------------------------------------------------------------------
+
   // POST /user/login
   login: (req, res) => {
     // Create body object
@@ -179,7 +179,7 @@ module.exports = {
     // Finished sign in
   },
 
-  // ---------------------------------------------------------------------------
+  
   // GET /user/logout
   logout: (req, res) => {
     const decoded = {

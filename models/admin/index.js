@@ -81,8 +81,7 @@ admin.pre("save", function(next) {
   }
 })
 
-// -----------------------------------------------------------------------------
-// DATA POPULATION
+
 
 admin.pre("find", function(next) {
   this.select({

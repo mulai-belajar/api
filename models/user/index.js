@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const sequence = require("mongoose-sequence")(mongoose)
 const userSchema = mongoose.Schema
 
-// -----------------------------------------------------------------------------
+
 // PRECONFIGURATION
 
 const modelName = "User"
@@ -92,13 +92,13 @@ const user = new userSchema(
   { timestamps: true }
 )
 
-// -----------------------------------------------------------------------------
+
 // GENERATED FIELDS
 
 // Auto increment userId
 user.plugin(sequence, { id: "user_counter", inc_field: "id" })
 
-// -----------------------------------------------------------------------------
+
 // MIDDLEWARES
 // - ROLES ASSIGNER
 // - PASSWORD HASH + SALT GENERATOR
@@ -128,8 +128,7 @@ user.pre("save", function(next) {
   }
 })
 
-// -----------------------------------------------------------------------------
-// DATA POPULATION
+
 
 user.pre("find", function(next) {
   this.select({
@@ -161,7 +160,7 @@ user.pre("update", function() {
   )
 })
 
-// -----------------------------------------------------------------------------
+
 // FINALLY REGISTER THE USERSCHEMA INTO MODEL
 
 module.exports = mongoose.model(modelName, user)
