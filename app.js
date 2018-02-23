@@ -1,6 +1,6 @@
-//require("dotenv").config()
+require("dotenv").config()
 
-//const cors = require("cors")
+const cors = require("cors")
 const express = require('express')
 const path = require('path')
 const favicon = require('serve-favicon')
@@ -24,9 +24,9 @@ const errorMessage = `Connection error : `
 
 // view engine setup
 
-//app.use(cors())
-//app.use(logger('dev'))
-//app.use(express.static(path.join(__dirname, 'public', 'favicon.ico')))
+app.use(cors())
+app.use(logger('dev'))
+app.use(express.static(path.join(__dirname, 'public', 'favicon.ico')))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
