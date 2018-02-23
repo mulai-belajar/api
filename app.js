@@ -11,6 +11,7 @@ const bodyParser = require('body-parser')
 const user = require('./routes/user')
 const admin = require('./routes/admin')
 const classes = require('./routes/class')
+const category = require('./routes/category')
 //const donation = require('./routes/donation')
 
 const mongoose = require(`mongoose`)
@@ -37,6 +38,7 @@ app.use(cookieParser())
 app.use('/admin', admin)
 app.use('/user', user)
 app.use('/class', classes)
+app.use('/category', category)
 //app.use('/donation', donation)
 
 mongoose.connect(url);
@@ -55,7 +57,7 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  
+
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}
 
