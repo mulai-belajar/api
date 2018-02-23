@@ -5,7 +5,7 @@ const usercontroller = require('../../controllers/user')
 const helpers = require("../../helpers/user-token")
 
 /* GET /user +  */
-router.get('/', usercontroller.get)
+router.get('/',  helpers.isAuthenticated, usercontroller.get)
 
 /* GET User by id */
 router.get(`/:id`, usercontroller.getById)
@@ -17,7 +17,7 @@ router.get(`/:id`, usercontroller.getById)
 router.post(`/register`, usercontroller.register)
 
 /* LOGIN User */
-//router.post("/login", usercontroller.login)
+router.post("/login", usercontroller.login)
 
 /* LOGOUT User*/
 //router.put("/logout", helpers.isAuthenticated, usercontroller.logout)
