@@ -26,5 +26,4 @@ router.delete("/", admincontroller.delete)
 // router.delete("/:id", helpers.isAuthenticated, admincontroller.deleteById)
 
 // router.put("/:id", helpers.isAuthenticated, admincontroller.putById)
-
 module.exports = router
