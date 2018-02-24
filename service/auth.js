@@ -15,7 +15,7 @@ const checkJwt = jwt({
   algorithms: ['RS256']
 })
 
-const checkScopes = jwtAuthz(['read:messages'])
+const checkScopes = jwtAuthz(['read:api'])
 
 module.exports = {
   checkJwt,
