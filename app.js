@@ -1,4 +1,4 @@
-const cors = require("cors")
+const cors = require('cors')
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 const classes = require('./routes/class')
+const category = require('./routes/category')
 
 const mongoose = require(`mongoose`)
 
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/api/class', classes)
+app.use('/api/category', category)
 
 mongoose.connect(url);
 db.on(`error`, console.log.bind(console, errorMessage));
