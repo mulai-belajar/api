@@ -1,27 +1,38 @@
 const Class = require('../../models/class')
+const Category = require('../../models/category')
 
 module.exports = {
     get : (req, res) => {
-      Class.find((err, classes) => {
-      if (err) {
-        // Status : Internal server error
-        return res.status(500).json({
-          message: 'Error when getting classes',
-          error: err
-        })
-      }
-      return res.json({
-        // Status : OK
-        message: 'Get a classes',
-        data: classes
+      Class.find({})
+      .populate({
+        path: 'category',
+        select: 'name'
       })
-    })
+      .exec((err, classes) => {
+        if (err) {
+          // Status : Internal server error
+          return res.status(500).json({
+            message: 'Error when getting classes',
+            error: err
+          })
+        }
+        return res.json({
+          // Status : OK
+          message: 'Get classes',
+          data: classes
+        })
+       })
     },
     getById : (req, res) => {
       const id = req.params.id;
       Class.findOne({
-        _id: id
-      }, (err, classes) => {
+        id: id
+      })
+      .populate({
+        path: 'category',
+        select: 'name'
+      })
+      .exec((err, classes) => {
         if (err) {
           // Status : Internal server error
           return res.status(500).json({
@@ -40,38 +51,48 @@ module.exports = {
           message: 'Get a class',
           data: classes
         })
-      })
+       })
     },
     post : (req, res) => {
       let newClass = new Class({
-        id : req.body.id,
         name : req.body.name,
         category : req.body.category,
         address : req.body.address,
         description : req.body.description,
         total_donation : req.body.total_donation,
-        status : req.body.status
+        status : req.body.status,
+        created_by : req.body.created_by
       });
 
       newClass.save((err, classes) => {
-        if (err) {
-          // Status : Internal server error
-          return res.status(500).json({
-            message: 'Error when creating class',
-            error: err
+        Category.findOneAndUpdate({
+          _id: newClass.category
+        },
+        {
+          $push: {
+            class: newClass._id
+          }
+        },(err, categories) => {
+          if (err) {
+            // Status : Internal server error
+            return res.status(500).json({
+              message: 'Error when creating class',
+              error: err
+            })
+          }
+          return res.status(201).json({
+            // Status : Created
+            message: 'Created a new class',
+            data: newClass
           })
         }
-        return res.status(201).json({
-          // Status : Created
-          message: 'Created a new class',
-          data: newClass
-        })
+        )
       })
     },
     put : (req, res) => {
       let id = req.params.id;
       Class.findOne({
-        _id: id
+        id: id
       }, (err, classes) => {
         if (err) {
           // Status : Internal server error
@@ -87,13 +108,13 @@ module.exports = {
           })
         }
 
-        classes.id = req.body.id ? req.body.id : classes.id
         classes.name = req.body.name ? req.body.name : classes.name
         classes.category = req.body.category ? req.body.category : classes.category
         classes.address = req.body.address ? req.body.address : classes.address
         classes.description = req.body.description ? req.body.description : classes.description
         classes.total_donation = req.body.total_donation ? req.body.total_donation : classes.total_donation
-        classes.status = req.body.status ? req.body.status : classes.status
+        classes.status = req.body.status ? req.body.status : classes.status,
+        classes.created_by = req.body.created_by ? req.body.created_by : classes.created_by
 
 
         classes.save((err, classes) => {

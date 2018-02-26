@@ -4,10 +4,10 @@ const categoryController = require('../../controllers/category')
 const authService = require('../../service/auth')
 
 // GET all data
-router.get('/', authService.checkJwt, authService.checkScopes, categoryController.get)
+router.get('/', categoryController.get)
 
 // GET a class
-router.get('/:id', authService.checkJwt, authService.checkScopes, categoryController.getById)
+router.get('/:id', categoryController.getById)
 
 // POST a class
 router.post('/', authService.checkJwt, authService.checkScopes, categoryController.post)

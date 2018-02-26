@@ -2,25 +2,29 @@ const Category = require('../../models/category')
 
 module.exports = {
     get : (req, res) => {
-      Category.find((err, categories) => {
-      if (err) {
-        // Status : Internal server error
-        return res.status(500).json({
-          message: 'Error when getting categories',
-          error: err
-        })
-      }
-      return res.json({
-        // Status : OK
-        message: 'Get categories',
-        data: categories
+      Category.find({})
+      .populate({
+        path: 'class'
       })
-    })
+      .exec((err, categories) => {
+        if (err) {
+          // Status : Internal server error
+          return res.status(500).json({
+            message: 'Error when getting categories',
+            error: err
+          })
+        }
+        return res.json({
+          // Status : OK
+          message: 'Get categories',
+          data: categories
+        })
+       })
     },
     getById : (req, res) => {
       const id = req.params.id;
       Category.findOne({
-        _id: id
+        id: id
       }, (err, category) => {
         if (err) {
           // Status : Internal server error
@@ -44,9 +48,7 @@ module.exports = {
     },
     post : (req, res) => {
       let newCategory = new Category({
-        id : req.body.id,
-        name : req.body.name,
-        image_url : req.body.image_url
+        name : req.body.name
       });
 
       newCategory.save((err, category) => {
@@ -67,7 +69,7 @@ module.exports = {
     put : (req, res) => {
       let id = req.params.id;
       Category.findOne({
-        _id: id
+        id: id
       }, (err, category) => {
         if (err) {
           // Status : Internal server error
@@ -83,9 +85,7 @@ module.exports = {
           })
         }
 
-        category.id = req.body.id ? req.body.id : category.id
         category.name = req.body.name ? req.body.name : category.name
-        category.image_url = req.body.image_url ? req.body.image_url : category.image_url
 
         category.save((err, category) => {
           if (err) {

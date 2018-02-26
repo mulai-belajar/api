@@ -7,7 +7,7 @@ const authService = require('../../service/auth')
 router.get('/', classController.get)
 
 // GET a class
-router.get('/:id', authService.checkJwt, authService.checkScopes, classController.getById)
+router.get('/:id', classController.getById)
 
 // POST a class
 router.post('/', authService.checkJwt, authService.checkScopes, classController.post)
