@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 const classes = require('./routes/class')
 const category = require('./routes/category')
+const donation = require('./routes/donation')
 
 const mongoose = require(`mongoose`)
 
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/api/class', classes)
 app.use('/api/category', category)
+app.use('/api/donation', donation)
 
 mongoose.connect(url);
 db.on(`error`, console.log.bind(console, errorMessage));
