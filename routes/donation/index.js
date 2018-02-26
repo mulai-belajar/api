@@ -13,9 +13,9 @@ router.get('/:id', authService.checkJwt, authService.checkScopes, donationContro
 router.post('/', authService.checkJwt, authService.checkScopes, donationController.post)
 
 // PUT a class
-//router.put('/:id', authService.checkJwt, authService.checkScopes, donationController.put)
+router.put('/:id', authService.checkJwt, authService.checkScopes, donationController.put)
 
 // DELETE a class
-//router.delete('/:id', authService.checkJwt, authService.checkScopes, donationController.delete)
+router.delete('/:id', authService.checkJwt, authService.checkScopes, donationController.delete)
 
 module.exports = router

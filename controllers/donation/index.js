@@ -85,62 +85,58 @@ module.exports = {
         )
       })
     },
-    // put : (req, res) => {
-    //   let id = req.params.id;
-    //   Class.findOne({
-    //     id: id
-    //   }, (err, classes) => {
-    //     if (err) {
-    //       // Status : Internal server error
-    //       return res.status(500).json({
-    //         message: 'Error when getting class',
-    //         error: err
-    //       });
-    //     }
-    //     if (!classes) {
-    //       // Status : Not Found
-    //       return res.status(404).json({
-    //         message: 'No such class'
-    //       })
-    //     }
-    //
-    //     classes.name = req.body.name ? req.body.name : classes.name
-    //     classes.category = req.body.category ? req.body.category : classes.category
-    //     classes.address = req.body.address ? req.body.address : classes.address
-    //     classes.description = req.body.description ? req.body.description : classes.description
-    //     classes.total_donation = req.body.total_donation ? req.body.total_donation : classes.total_donation
-    //     classes.status = req.body.status ? req.body.status : classes.status,
-    //     classes.created_by = req.body.created_by ? req.body.created_by : classes.created_by
-    //
-    //
-    //     classes.save((err, classes) => {
-    //       if (err) {
-    //         // Status : Internal server error
-    //         return res.status(500).json({
-    //           message: 'Error when updating class',
-    //           error: err
-    //         })
-    //       }
-    //       return res.json({
-    //         // Status : OK
-    //         message: 'Updated a class',
-    //         data: classes
-    //       })
-    //     })
-    //   })
-    // },
-    // delete : (req, res) => {
-    //   let id = req.params.id;
-    //   Class.findByIdAndRemove(id, (err, classes) => {
-    //     if (err) {
-    //       // Status : Internal server error
-    //       return res.status(500).json({
-    //         message: 'Error when deleting class',
-    //         error: err
-    //       })
-    //     }
-    //     // Status : No Content
-    //     return res.status(204).json();
-    //   })
-    // }
+    put : (req, res) => {
+      let id = req.params.id;
+      Donation.findOne({
+        id: id
+      }, (err, donation) => {
+        if (err) {
+          // Status : Internal server error
+          return res.status(500).json({
+            message: 'Error when getting donation',
+            error: err
+          });
+        }
+        if (!donation) {
+          // Status : Not Found
+          return res.status(404).json({
+            message: 'No such donation'
+          })
+        }
+
+        donation.donatur = req.body.donatur ? req.body.donatur : classes.donatur
+        donation.class = req.body.class ? req.body.class : classes.class
+        donation.amount = req.body.amount ? req.body.amount : classes.amount
+
+
+        donation.save((err, donation) => {
+          if (err) {
+            // Status : Internal server error
+            return res.status(500).json({
+              message: 'Error when updating class',
+              error: err
+            })
+          }
+          return res.json({
+            // Status : OK
+            message: 'Updated a donation',
+            data: donation
+          })
+        })
+      })
+    },
+    delete : (req, res) => {
+      let id = req.params.id;
+      Donation.findByIdAndRemove(id, (err, donation) => {
+        if (err) {
+          // Status : Internal server error
+          return res.status(500).json({
+            message: 'Error when deleting donation',
+            error: err
+          })
+        }
+        // Status : No Content
+        return res.status(204).json();
+      })
+    }
 }
