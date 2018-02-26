@@ -31,8 +31,13 @@ const ClassSchema = new Schema({
   category: {
     type: Schema.Types.ObjectId,
     ref: 'Category'
-  }
-
+  },
+  donatur: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Donation'
+    }
+  ]
 },
 { timestamps: true, versionKey: false })
 

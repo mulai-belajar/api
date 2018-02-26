@@ -67,6 +67,9 @@ module.exports = {
         {
           $inc: {
             now_donation: newDonation.amount
+          },
+          $push: {
+            donatur: newDonation._id
           }
         },(err, classes) => {
           if (err) {

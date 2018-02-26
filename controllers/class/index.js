@@ -8,6 +8,10 @@ module.exports = {
         path: 'category',
         select: 'name'
       })
+      .populate({
+        path: 'donatur',
+        select: 'donatur',
+      })
       .exec((err, classes) => {
         if (err) {
           // Status : Internal server error
@@ -31,6 +35,10 @@ module.exports = {
       .populate({
         path: 'category',
         select: 'name'
+      })
+      .populate({
+        path: 'donation',
+        select: 'donatur',
       })
       .exec((err, classes) => {
         if (err) {
