@@ -3,9 +3,9 @@ var router = express.Router();
 const authService = require('../service/auth')
 
 // GET all data
-router.get('/public', (req,res) => {
+router.get('/', (req,res) => {
   res.json({
-    message: 'Get public data'
+    message: 'Connected to public data Mulai Belajar'
   })
 })
 
