@@ -16,7 +16,7 @@ const mongoose = require(`mongoose`)
 var app = express();
 
 const db = mongoose.connection
-const url = `mongodb+srv://mulaibelajar:mulaibelajar@mulaibelajar-e4ojd.mongodb.net/mulaibelajar`
+const url = `mongodb://mulaibelajar:mulaibelajar@ds249798.mlab.com:49798/mulaibelajar`
 const successMessage = `You're connected to MongoDB`
 const errorMessage = `Connection error : `
 
