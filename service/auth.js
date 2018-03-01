@@ -7,11 +7,11 @@ const checkJwt = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: 'https://mulaibelajar.auth0.com/.well-known/jwks.json'
+    jwksUri: process.env.AUTH_JWKS_URI
   }),
 
-  audience: 'http://api.mulaibelajar.com',
-  issuer: 'https://mulaibelajar.auth0.com/',
+  audience: process.env.AUTH_AUDIENCE,
+  issuer: process.env.AUTH_ISSUER,
   algorithms: ['RS256']
 })
 

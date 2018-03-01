@@ -1,3 +1,4 @@
+require('dotenv').config()
 const cors = require('cors')
 var express = require('express');
 var path = require('path');
@@ -16,7 +17,7 @@ const mongoose = require(`mongoose`)
 var app = express();
 
 const db = mongoose.connection
-const url = `mongodb://mulaibelajar:mulaibelajar@ds249798.mlab.com:49798/mulaibelajar`
+const url = process.env.MONGODB_URI
 const successMessage = `You're connected to MongoDB`
 const errorMessage = `Connection error : `
 
