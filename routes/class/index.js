@@ -9,6 +9,9 @@ router.get('/', classController.get)
 // GET a class
 router.get('/:id', classController.getById)
 
+// GET class by userId
+router.get('/user/:userId', authService.checkJwt, authService.checkScopes, classController.getByUserId)
+
 // POST a class
 router.post('/', authService.checkJwt, authService.checkScopes, classController.post)
 

@@ -37,7 +37,7 @@ module.exports = {
         select: 'name'
       })
       .populate({
-        path: 'donation',
+        path: 'donatur',
         select: 'donatur',
       })
       .exec((err, classes) => {
@@ -57,6 +57,40 @@ module.exports = {
         return res.json({
           // Status : OK
           message: 'Get a class',
+          data: classes
+        })
+       })
+    },
+    getByUserId : (req, res) => {
+      const userId = req.params.userId;
+      Class.find({
+        created_by : userId
+      })
+      .populate({
+        path: 'category',
+        select: 'name'
+      })
+      .populate({
+        path: 'donatur',
+        select: 'donatur',
+      })
+      .exec((err, classes) => {
+        if (err) {
+          // Status : Internal server error
+          return res.status(500).json({
+            message: 'Error when getting class',
+            error: err
+          })
+        }
+        if (!classes) {
+          // Status : Not Found
+          return res.status(404).json({
+            message: 'No such class'
+          })
+        }
+        return res.json({
+          // Status : OK
+          message: 'Get class by user id',
           data: classes
         })
        })
